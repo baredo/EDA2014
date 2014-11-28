@@ -3,14 +3,14 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class GestorFiguras {
-	Hashtable<String,Figura> hashtable;
+	Hashtable<Integer,Figura> hashtable;
 	
 	
 	/**
 	 * Crea un gestor de figuras vacia
 	 */
 	public GestorFiguras(){
-		hashtable = new Hashtable<String,Figura>();
+		hashtable = new Hashtable<Integer,Figura>();
 	}
 	
 	/**
@@ -18,7 +18,7 @@ public class GestorFiguras {
 	 * @param figura
 	 */
 	public void guardar(Figura figura){
-		// TODO		
+		hashtable.put(figura.hashCode(), figura);	
 	}
 	
 	/**
