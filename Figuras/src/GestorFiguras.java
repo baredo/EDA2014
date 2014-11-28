@@ -3,14 +3,14 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class GestorFiguras {
-	Hashtable<Integer,Figura> hashtable;
+	Hashtable<String,Figura> hashtable;
 	
 	
 	/**
 	 * Crea un gestor de figuras vacia
 	 */
 	public GestorFiguras(){
-		hashtable = new Hashtable<Integer,Figura>();
+		hashtable = new Hashtable<String,Figura>();
 	}
 	
 	/**
@@ -18,7 +18,11 @@ public class GestorFiguras {
 	 * @param figura
 	 */
 	public void guardar(Figura figura){
-		hashtable.put(figura.hashCode(), figura);	
+		while(existe(figura.getNombre())){
+			figura.setNombre(figura.getNombre()+"1");
+			System.out.println("Ya existia "+figura.getNombre()+". Se ha renombrado por "+figura.getNombre()+"1");
+		}
+			hashtable.put(figura.getNombre(), figura);	
 	}
 	
 	/**
@@ -27,8 +31,7 @@ public class GestorFiguras {
 	 * @return la figura
 	 */
 	public Figura recuperar(String nombre){
-		// TODO
-		return null;
+		return hashtable.get(nombre);
 	}
 	
 	/**
@@ -36,7 +39,7 @@ public class GestorFiguras {
 	 * @param figura, una figura 
 	 */
 	public void cambiar(Figura figura){
-		//TODO		
+		hashtable.put(figura.getNombre(), figura);			
 	}
 	
 	/**
@@ -45,8 +48,7 @@ public class GestorFiguras {
 	 * @return devuelve True si existe y False, en caso contrario
 	 */
 	public boolean existe(String nombre){
-		//TODO
-		return false;
+		return hashtable.containsKey(nombre);
 	}
 	
 	/**

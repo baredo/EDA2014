@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Figura {
 	// TODO Representa una figura mediante trazos echos a mano
-
+	String nombre;
 	/**
 	 * Crea una figura con los trazos indicados
 	 * @param trazos, una secuencia de trazos
@@ -28,8 +28,11 @@ public class Figura {
 	 * @return el nombre
 	 */
 	public String getNombre(){
-		//TODO
-		return "";
+		return nombre;
+	}
+	
+	public void setNombre(String nombre){
+		this.nombre = nombre;
 	}
 	
 	/**
@@ -42,7 +45,7 @@ public class Figura {
 	}
 	
 	/**
-	 * A–ade un trazo al final de los trazos de la figura
+	 * Aï¿½ade un trazo al final de los trazos de la figura
 	 * @param c, letra que indica un trazo
 	 */
 	public void anadirTrazo(char c){
@@ -50,7 +53,7 @@ public class Figura {
 	}
 	
 	/**
-	 * A–ade un trazo al inicio o al final de los trazos de la figura
+	 * Aï¿½ade un trazo al inicio o al final de los trazos de la figura
 	 * @param c, letra que indica un trazo
 	 * @param alInicio, si True indica al inicio y False, al final
 	 */
@@ -78,7 +81,7 @@ public class Figura {
 	}
 	
 	/**
-	 * Elimina la secuencia de trazos desde la œltima ocurrencia del trazo de tipo 'c'
+	 * Elimina la secuencia de trazos desde la ï¿½ltima ocurrencia del trazo de tipo 'c'
 	 * @param c, un tipo de trazo
 	 */
 	public void eliminarDesdeUltimoTrazo(char c){
@@ -88,7 +91,7 @@ public class Figura {
 	/**
 	 * Sustituye el primer trazo de tipo 'c' con los trazos dados en 'trazos'
 	 * Pre: Loz trazos dados deben de formar una secuencia casi-cerrada-1, es decir, le falta un trazo para que sea cerrada y
-	 * deber’a de seguir correctamente la secuencia con el siguinte trazo a 'c'. Porque si no repercute en la anchura y altura.
+	 * deberï¿½a de seguir correctamente la secuencia con el siguinte trazo a 'c'. Porque si no repercute en la anchura y altura.
 	 * @param c, un tipo de trazo
 	 * @param trazos
 	 */
@@ -97,7 +100,7 @@ public class Figura {
 	}
 	
 	/**
-	 * Gira la figura 90¼ a la derecha
+	 * Gira la figura 90ï¿½ a la derecha
 	 */
 	public void girarDerecha(){
 		//TODO		
@@ -157,7 +160,7 @@ public class Figura {
 	}
 
 	/**
-	 * Verifica si la figura actual y la figura 'f' son homoteticas. Es homotetica si las dos figuras tienen la misma orientaci—n 
+	 * Verifica si la figura actual y la figura 'f' son homoteticas. Es homotetica si las dos figuras tienen la misma orientaciï¿½n 
 	 * y aplicando una secuencia de homotecias del factor 2 a una de las figuras se obtiene la otra.
 	 * @param f, una figura
 	 * @return True si es homotetica y False, en caso contrario
