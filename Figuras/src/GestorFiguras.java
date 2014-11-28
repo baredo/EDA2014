@@ -1,16 +1,16 @@
 
+import java.util.Hashtable;
 import java.util.List;
 
 public class GestorFiguras {
-	//TODO Representacion de una coleccion de figuras
+	Hashtable<String,Figura> hashtable;
 	
 	
 	/**
 	 * Crea un gestor de figuras vacia
 	 */
 	public GestorFiguras(){
-		// TODO
-		
+		hashtable = new Hashtable<String,Figura>();
 	}
 	
 	/**
