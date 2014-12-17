@@ -18,11 +18,7 @@ public class GestorFiguras {
 	 * @param figura
 	 */
 	public void guardar(Figura figura){
-		while(existe(figura.getNombre())){
-			figura.setNombre(figura.getNombre()+"1");
-			System.out.println("Ya existia "+figura.getNombre()+". Se ha renombrado por "+figura.getNombre()+"1");
-		}
-			hashtable.put(figura.getNombre(), figura);	
+		hashtable.put(figura.getNombre(), figura);	
 	}
 	
 	/**
@@ -57,8 +53,9 @@ public class GestorFiguras {
 	 * @return una lista de figuras
 	 */
 	public List<Figura> recuperarLista(String [] nombres){
-		//TODO
-		return null;
+		Hashtable<String,Figura> listaFiguras = new Hashtable<String,Figura>();
+		for(int i=0; i<nombres.length; i++) listaFiguras.put(nombres[i], recuperar(nombres[i]));
+		return (List<Figura>) listaFiguras;
 	}
 
 	/**

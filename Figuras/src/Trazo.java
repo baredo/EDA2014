@@ -11,24 +11,24 @@ public class Trazo {
 	 *
 	 */
 	 enum Tipo { 
-		D, B, I, S;
+			D, B, I, S;//derecha,bajar,izquierda,subir
 
-		/**
-		 * Devuelve cual es el tipo de Trazo despu�s de girar 90� el trazo actual
-		 * @return un tipo de trazo
-		 */
-		public Tipo girarDerecha(){
-			int pos = (this.ordinal() + 1) % Tipo.values().length;
-			return Tipo.values()[pos];
+			/**
+			 * Devuelve cual es el tipo de Trazo despu�s de girar 90� el trazo actual
+			 * @return un tipo de trazo
+			 */
+			public Tipo girarDerecha(){
+				int pos = (this.ordinal() + 1) % Tipo.values().length;
+				return Tipo.values()[pos];
+			}
+			/**
+			 * Devuelve la representacion de un tipo de Trazo como una cadena de caracteres
+			 * @return una cadena de caracteres
+			 */
+			public String toString(){
+				return name();
+			}
 		}
-		/**
-		 * Devuelve la representacion de un tipo de Trazo como una cadena de caracteres
-		 * @return una cadena de caracteres
-		 */
-		public String toString(){
-			return name();
-		}
-	}
 
 	private Tipo orientacion;
 	

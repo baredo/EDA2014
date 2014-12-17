@@ -1,16 +1,18 @@
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.math.*;
 
 public class Figura {
-	// TODO Representa una figura mediante trazos echos a mano
 	String nombre;
+	LinkedList<Trazo> trazos;
 	/**
 	 * Crea una figura con los trazos indicados
 	 * @param trazos, una secuencia de trazos
 	 */
 	public Figura(String trazos){
-		//TODO
-
+		this(trazos,"sin nombre");
 	}
 	
 	/**
@@ -19,8 +21,10 @@ public class Figura {
 	 * @param nombre, un nombre 
 	 */
 	public Figura(String trazos, String nombre){
-		//TODO
-
+		this.trazos = new LinkedList<Trazo>();
+		for(int i=0; i<trazos.length(); i++){
+			this.trazos.add(new Trazo(trazos.charAt(i)));
+		}
 	}
 	
 	/**
@@ -40,8 +44,7 @@ public class Figura {
 	 * @return lista de trazos
 	 */
 	public List<Trazo> getTrazos(){
-		//TODO
-		return null;
+		return (List<Trazo>) trazos;
 	}
 	
 	/**
@@ -49,7 +52,7 @@ public class Figura {
 	 * @param c, letra que indica un trazo
 	 */
 	public void anadirTrazo(char c){
-		//TODO
+		this.trazos.add(new Trazo(c));
 	}
 	
 	/**
@@ -58,7 +61,8 @@ public class Figura {
 	 * @param alInicio, si True indica al inicio y False, al final
 	 */
 	public void anadirTrazo(char c, boolean alInicio){
-		//TODO
+		if(alInicio)this.trazos.addFirst(new Trazo(c));
+		this.trazos.addLast(new Trazo(c));
 	}
 	
 	/**
@@ -66,7 +70,10 @@ public class Figura {
 	 * @param f, una figura
 	 */
 	public void fusionar(Figura f){
-		//TODO		
+		Iterator<Trazo> iterator = f.getTrazos().iterator();
+		while(iterator.hasNext()){
+			this.trazos.add(iterator.next());
+		}
 	}
 	
 	/**
@@ -77,7 +84,12 @@ public class Figura {
 	 * @param f, una figura
 	 */
 	public void insertar(int pos, Figura f){
-		//TODO
+		Iterator<Trazo> iterator = f.getTrazos().iterator();
+		int contador = 0;
+		while(iterator.hasNext()){
+			this.trazos.add(pos+contador, iterator.next());
+			contador++;
+		}
 	}
 	
 	/**
@@ -85,7 +97,19 @@ public class Figura {
 	 * @param c, un tipo de trazo
 	 */
 	public void eliminarDesdeUltimoTrazo(char c){
-		//TODO
+		Iterator<Trazo> iterator = this.trazos.iterator();
+		int contador = 0;
+		int buffer = -1;
+		while(iterator.hasNext()){
+			if(iterator.next().getOrientacion() == c){
+				buffer = contador;
+			}
+			contador++;
+		}
+		if(buffer == -1) return;
+		for(int i=0; i<this.trazos.size()-buffer; i++){
+			this.trazos.remove(buffer);
+		}
 	}
 	
 	/**
@@ -96,21 +120,35 @@ public class Figura {
 	 * @param trazos
 	 */
 	public void sustituir(char c, String trazos){
-		//TODO
+		Figura figura = new Figura(trazos);
+		int pos = this.trazos.indexOf(c);
+		this.trazos.remove(pos);
+		insertar(pos, figura);
 	}
 	
 	/**
 	 * Gira la figura 90� a la derecha
 	 */
 	public void girarDerecha(){
-		//TODO		
+		Iterator<Trazo> iterator = this.trazos.iterator();
+		while(iterator.hasNext()){
+			iterator.next().girarDerecha();
+		}
 	}
 	
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
 	 */
 	public void homotecia2(){
-		//TODO		
+		Figura auxiliar = new Figura("");
+		Iterator<Trazo> iterator = this.trazos.iterator();
+		char buffer;
+		while(iterator.hasNext()){
+			buffer = iterator.next().getOrientacion();
+			auxiliar.anadirTrazo(buffer);
+			auxiliar.anadirTrazo(buffer);
+		}
+		
 	}
 	
 	/**
@@ -118,8 +156,7 @@ public class Figura {
 	 * @return longitud de la figura
 	 */
 	public int longitud(){
-		//TODO
-		return 0;
+		return this.trazos.size();
 	}
 	
 	/**
@@ -127,7 +164,21 @@ public class Figura {
 	 * @return altura de la figura
 	 */
 	public int altura(){
-		return 0;
+		Iterator<Trazo> iterator = this.trazos.iterator();
+		char buffer;
+		int contador = 0;
+		int max = 0;
+		int min = 0;
+		int contadorAbsoluto=0;
+		while(iterator.hasNext()){
+			buffer = iterator.next().getOrientacion();
+			if(buffer == 'S') contador++;
+			else if(buffer == 'B') contador--;
+			contadorAbsoluto = Math.abs(contador);
+			if(contadorAbsoluto > max && contador > 0) max = contadorAbsoluto;
+			if(contadorAbsoluto > min && contador < 0) min = contadorAbsoluto;
+		}
+		return max+min;
 	}
 	
 	/**
@@ -135,8 +186,21 @@ public class Figura {
 	 * @return anchura de la figura
 	 */
 	public int anchura(){
-		//TODO
-		return 0;
+		Iterator<Trazo> iterator = this.trazos.iterator();
+		char buffer;
+		int contador = 0;
+		int max = 0;
+		int min = 0;
+		int contadorAbsoluto=0;
+		while(iterator.hasNext()){
+			buffer = iterator.next().getOrientacion();
+			if(buffer == 'D') contador++;
+			else if(buffer == 'I') contador--;
+			contadorAbsoluto = Math.abs(contador);
+			if(contadorAbsoluto > max && contador > 0) max = contadorAbsoluto;
+			if(contadorAbsoluto > min && contador < 0) min = contadorAbsoluto;
+		}
+		return max+min;
 	}
 	
 	/**
@@ -144,7 +208,7 @@ public class Figura {
 	 * @return superficie de la figura
 	 */
 	public int superficie(){
-		return 0;
+		return anchura()*altura();
 	}
 
 	/**
